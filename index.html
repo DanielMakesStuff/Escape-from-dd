@@ -3,77 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESCAPE MODE</title>
+    <title>Escape Mode — Kinetic Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div id="menu">
-    <div class="menuBox">
-        <h1>ESCAPE MODE</h1>
-        <p class="subtitle">TWO LEVELS. ONE WAY OUT.</p>
+    <div class="menu-card">
+        <div class="studio">KINETIC STUDIOS</div>
+
+        <h1>ESCAPE<br><span>MODE</span></h1>
+
+        <p class="tagline">THE HUNT BEGINS</p>
 
         <div class="mission">
             <b>MISSION</b>
             <p>
-                Escape the mansion, then survive the island.
-                Find the key and reach the exit before you are caught.
+                Search the mansion. Find the key.
+                Escape before the Hunter catches you.
             </p>
         </div>
 
         <button id="startButton">START GAME</button>
 
         <div class="controls">
-            <b>CONTROLS</b>
-            <p>WASD / ARROWS — MOVE</p>
-            <p>SHIFT — SPRINT</p>
-            <p>E — INTERACT</p>
+            <span><b>WASD</b> MOVE</span>
+            <span><b>SHIFT</b> SPRINT</span>
+            <span><b>E</b> SEARCH</span>
         </div>
     </div>
 </div>
 
-<div id="gameScreen">
+
+<div id="game" class="hidden">
+
+    <canvas id="canvas"></canvas>
 
     <div id="hud">
-        <div>
-            <span>LEVEL</span>
-            <strong id="levelText">1</strong>
+
+        <div class="hud-left">
+
+            <div class="hud-box">
+                <small>LEVEL</small>
+                <strong id="level">1</strong>
+            </div>
+
+            <div class="hud-box objective">
+                <small>OBJECTIVE</small>
+                <strong id="objective">SEARCH THE MANSION</strong>
+            </div>
+
         </div>
 
-        <div>
-            <span>HEALTH</span>
-            <strong id="healthText">100</strong>
+
+        <div class="hud-right">
+
+            <div class="hud-box">
+                <small>HEALTH</small>
+                <strong id="health">100</strong>
+            </div>
+
+            <div class="hud-box">
+                <small>STAMINA</small>
+                <div class="stamina">
+                    <div id="stamina"></div>
+                </div>
+            </div>
+
+            <div class="hud-box">
+                <small>ITEM</small>
+                <strong id="item">NONE</strong>
+            </div>
+
+            <div class="hud-box">
+                <small>TIME</small>
+                <strong id="timer">00:00</strong>
+            </div>
+
         </div>
 
-        <div>
-            <span>KEY</span>
-            <strong id="keyText">NO</strong>
-        </div>
-
-        <div>
-            <span>TIME</span>
-            <strong id="timeText">120</strong>
-        </div>
     </div>
 
-    <canvas id="gameCanvas"></canvas>
 
-    <div id="objective">
-        FIND THE KEY AND ESCAPE
-    </div>
+    <div id="warning">THE HUNTER IS NEAR</div>
+
+    <div id="prompt"></div>
 
     <div id="message"></div>
 
+
+    <div id="mobile">
+
+        <div id="joystick">
+            <div id="knob"></div>
+        </div>
+
+        <button id="runButton">RUN</button>
+        <button id="interactButton">E</button>
+
+    </div>
+
+
+    <div class="watermark">
+        KINETIC STUDIOS
+    </div>
+
 </div>
 
-<div id="endScreen">
-    <div class="endBox">
-        <h1 id="endTitle">YOU ESCAPED</h1>
+
+<div id="end" class="hidden">
+
+    <div class="end-card">
+
+        <div class="studio">KINETIC STUDIOS</div>
+
+        <h2 id="endTitle">ESCAPED</h2>
+
         <p id="endText"></p>
-        <button id="restartButton">PLAY AGAIN</button>
+
+        <div class="results">
+
+            <div>
+                <small>TIME</small>
+                <b id="finalTime">00:00</b>
+            </div>
+
+            <div>
+                <small>LEVEL</small>
+                <b id="finalLevel">1</b>
+            </div>
+
+        </div>
+
+        <button id="restart">PLAY AGAIN</button>
+
     </div>
+
 </div>
+
 
 <script src="script.js"></script>
 
