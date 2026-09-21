@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 html,
@@ -9,229 +10,494 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif;
-    background: #050505;
+    background: #050607;
     color: white;
+    font-family: Arial, sans-serif;
+}
+
+.hidden {
+    display: none !important;
 }
 
 button {
-    font-family: Arial, sans-serif;
     cursor: pointer;
 }
 
-#menu {
+
+/* =========================
+   MENU
+========================= */
+
+#menu,
+#end {
     position: fixed;
     inset: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background:
-        radial-gradient(circle at center, #202020 0%, #080808 55%, #000 100%);
-    z-index: 20;
+        radial-gradient(
+            circle at center,
+            #30363b 0%,
+            #101316 45%,
+            #030405 100%
+        );
+
+    z-index: 100;
 }
 
-.menuBox {
-    width: min(600px, 90%);
+.menu-card,
+.end-card {
+    width: min(650px, 90%);
     padding: 45px;
+
+    background: rgba(7, 9, 11, .96);
+
+    border: 1px solid #4b5258;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.8);
+
     text-align: center;
-    background: rgba(15, 15, 15, 0.96);
-    border: 2px solid #444;
-    border-radius: 18px;
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
 }
 
-.menuBox h1 {
-    font-size: clamp(40px, 8vw, 72px);
-    letter-spacing: 7px;
-    margin-bottom: 10px;
+.studio {
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: #929ba3;
+    margin-bottom: 25px;
 }
 
-.subtitle {
-    color: #aaa;
-    letter-spacing: 4px;
-    margin-bottom: 30px;
+h1 {
+    font-size: clamp(65px, 12vw, 115px);
+    line-height: .78;
+    letter-spacing: 8px;
+}
+
+h1 span {
+    color: #8b969f;
+}
+
+.tagline {
+    margin-top: 25px;
+
+    color: #68727a;
+
+    font-size: 11px;
+    letter-spacing: 5px;
 }
 
 .mission {
     text-align: left;
-    background: #111;
-    border: 1px solid #333;
-    border-radius: 10px;
+
+    margin: 35px 0;
+
     padding: 20px;
-    margin-bottom: 25px;
+
+    border-left: 3px solid #aeb6bc;
+
+    background: rgba(255,255,255,.035);
 }
 
-.mission b,
-.controls b {
-    letter-spacing: 2px;
+.mission b {
+    font-size: 9px;
+    letter-spacing: 3px;
 }
 
 .mission p {
-    color: #bbb;
     margin-top: 8px;
-    line-height: 1.5;
+
+    color: #929aa1;
+
+    line-height: 1.6;
 }
 
 #startButton,
-#restartButton {
-    border: 0;
-    border-radius: 10px;
-    padding: 16px 38px;
-    background: #e7e7e7;
-    color: #111;
-    font-size: 18px;
+#restart {
+    width: 100%;
+
+    padding: 18px;
+
+    background: #e5e9ec;
+
+    color: #080a0c;
+
+    border: none;
+
     font-weight: bold;
-    transition: 0.15s;
+
+    letter-spacing: 3px;
+
+    transition: .15s;
 }
 
 #startButton:hover,
-#restartButton:hover {
-    transform: scale(1.04);
+#restart:hover {
     background: white;
+    transform: translateY(-2px);
 }
 
 .controls {
     margin-top: 25px;
-    color: #888;
-    font-size: 13px;
-    line-height: 1.8;
+
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+
+    color: #606970;
+
+    font-size: 9px;
+    letter-spacing: 1px;
 }
 
-#gameScreen {
-    display: none;
+.controls b {
+    color: #dce0e3;
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+#game {
     position: fixed;
     inset: 0;
-    background: black;
 }
 
-#gameCanvas {
-    display: block;
+#canvas {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
     width: 100%;
     height: 100%;
 }
 
+
+/* =========================
+   HUD
+========================= */
+
 #hud {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
+    position: absolute;
+
+    left: 18px;
+    right: 18px;
+    top: 18px;
 
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
 
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid #444;
-    border-radius: 12px;
+    pointer-events: none;
 }
 
-#hud div {
-    min-width: 80px;
-    text-align: center;
+.hud-left,
+.hud-right {
+    display: flex;
+    gap: 8px;
 }
 
-#hud span {
+.hud-box {
+    padding: 9px 13px;
+
+    min-width: 75px;
+
+    background: rgba(4,6,8,.85);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    backdrop-filter: blur(8px);
+}
+
+.hud-box small {
     display: block;
-    font-size: 10px;
-    color: #888;
+
+    color: #68727b;
+
+    font-size: 8px;
+
     letter-spacing: 2px;
+
+    margin-bottom: 5px;
 }
 
-#hud strong {
-    display: block;
-    margin-top: 3px;
-    font-size: 18px;
-}
-
-#objective {
-    position: fixed;
-    left: 15px;
-    bottom: 15px;
-    z-index: 5;
-
-    padding: 12px 16px;
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid #444;
-    border-radius: 8px;
-
+.hud-box strong {
     font-size: 13px;
-    letter-spacing: 1px;
 }
+
+.objective {
+    min-width: 230px;
+}
+
+.stamina {
+    width: 80px;
+    height: 7px;
+
+    background: #252a2e;
+}
+
+#stamina {
+    width: 100%;
+    height: 100%;
+
+    background: #dce2e6;
+}
+
+
+/* =========================
+   WARNING
+========================= */
+
+#warning {
+    position: absolute;
+
+    top: 105px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 11px 22px;
+
+    background: rgba(70,20,20,.9);
+
+    border: 1px solid #784848;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    opacity: 0;
+
+    transition: .2s;
+}
+
+#warning.show {
+    opacity: 1;
+}
+
+
+/* =========================
+   PROMPT
+========================= */
+
+#prompt {
+    position: absolute;
+
+    bottom: 80px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 12px 22px;
+
+    background: rgba(0,0,0,.85);
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    opacity: 0;
+}
+
+#prompt.show {
+    opacity: 1;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
 
 #message {
-    position: fixed;
+    position: absolute;
+
+    bottom: 30px;
     left: 50%;
-    bottom: 35px;
+
     transform: translateX(-50%);
-    z-index: 10;
 
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 12px 25px;
 
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
+    background: rgba(0,0,0,.85);
 
-    font-weight: bold;
+    border: 1px solid rgba(255,255,255,.15);
+
+    font-size: 12px;
+
     opacity: 0;
-    transition: opacity 0.2s;
 }
 
-#endScreen {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 30;
+#message.show {
+    opacity: 1;
+}
 
-    align-items: center;
+
+/* =========================
+   WATERMARK
+========================= */
+
+.watermark {
+    position: absolute;
+
+    right: 18px;
+    bottom: 14px;
+
+    color: rgba(255,255,255,.28);
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================
+   END
+========================= */
+
+.end-card h2 {
+    font-size: clamp(55px, 11vw, 105px);
+
+    letter-spacing: 7px;
+}
+
+.end-card p {
+    margin: 25px 0;
+
+    color: #929aa1;
+
+    line-height: 1.6;
+}
+
+.results {
+    display: flex;
+
     justify-content: center;
 
-    background: rgba(0, 0, 0, 0.94);
-}
+    gap: 70px;
 
-.endBox {
-    width: min(550px, 90%);
-    padding: 45px;
-    text-align: center;
-
-    background: #111;
-    border: 2px solid #444;
-    border-radius: 18px;
-}
-
-.endBox h1 {
-    font-size: clamp(35px, 7vw, 65px);
-    margin-bottom: 20px;
-}
-
-.endBox p {
-    color: #aaa;
-    line-height: 1.5;
     margin-bottom: 30px;
 }
 
-@media (max-width: 600px) {
+.results small {
+    display: block;
 
-    .menuBox {
-        padding: 25px;
+    color: #68727b;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 5px;
+}
+
+.results b {
+    font-size: 21px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+#mobile {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+#joystick {
+    position: absolute;
+
+    left: 25px;
+    bottom: 25px;
+
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.35);
+
+    border: 2px solid rgba(255,255,255,.18);
+
+    pointer-events: auto;
+}
+
+#knob {
+    position: absolute;
+
+    left: 43px;
+    top: 43px;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.3);
+}
+
+#runButton,
+#interactButton {
+    position: absolute;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background: rgba(0,0,0,.55);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    pointer-events: auto;
+}
+
+#runButton {
+    right: 25px;
+    bottom: 25px;
+
+    width: 90px;
+    height: 90px;
+}
+
+#interactButton {
+    right: 135px;
+    bottom: 85px;
+
+    width: 60px;
+    height: 60px;
+}
+
+
+@media (pointer: coarse) {
+
+    #mobile {
+        display: block;
+    }
+
+    .hud-right {
+        display: none;
+    }
+
+    .controls {
+        display: none;
     }
 
     #hud {
-        width: 95%;
-        justify-content: space-around;
-        gap: 2px;
+        left: 10px;
+        top: 10px;
     }
 
-    #hud div {
-        min-width: 55px;
-    }
-
-    #hud strong {
-        font-size: 15px;
-    }
-
-    #objective {
-        font-size: 10px;
-        max-width: 75%;
+    .objective {
+        min-width: 180px;
     }
 }
