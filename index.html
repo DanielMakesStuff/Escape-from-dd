@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESCAPE MODE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="menu">
+    <div class="menuBox">
+        <h1>ESCAPE MODE</h1>
+        <p class="subtitle">TWO LEVELS. ONE WAY OUT.</p>
+
+        <div class="mission">
+            <b>MISSION</b>
+            <p>
+                Escape the mansion, then survive the island.
+                Find the key and reach the exit before you are caught.
+            </p>
+        </div>
+
+        <button id="startButton">START GAME</button>
+
+        <div class="controls">
+            <b>CONTROLS</b>
+            <p>WASD / ARROWS — MOVE</p>
+            <p>SHIFT — SPRINT</p>
+            <p>E — INTERACT</p>
+        </div>
+    </div>
+</div>
+
+<div id="gameScreen">
+
+    <div id="hud">
+        <div>
+            <span>LEVEL</span>
+            <strong id="levelText">1</strong>
+        </div>
+
+        <div>
+            <span>HEALTH</span>
+            <strong id="healthText">100</strong>
+        </div>
+
+        <div>
+            <span>KEY</span>
+            <strong id="keyText">NO</strong>
+        </div>
+
+        <div>
+            <span>TIME</span>
+            <strong id="timeText">120</strong>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="objective">
+        FIND THE KEY AND ESCAPE
+    </div>
+
+    <div id="message"></div>
+
+</div>
+
+<div id="endScreen">
+    <div class="endBox">
+        <h1 id="endTitle">YOU ESCAPED</h1>
+        <p id="endText"></p>
+        <button id="restartButton">PLAY AGAIN</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
